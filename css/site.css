@@ -1,3 +1,8 @@
+
+html,body{
+	background-color:rgba(0,0,0,0);
+	height:100%;
+}
 html { 
   background: url(../images/parchment.jpg) no-repeat center center fixed; 
   -webkit-background-size: cover;
@@ -5,7 +10,10 @@ html {
   -o-background-size: cover;
   background-size: cover;
 }
-#center-graphic{
-  url(../Assets/maraudersmapGraphic.png); 
- margin: auto;
+#center-graphic{	
+	background-image: url(../Assets/maraudersMapGraphic.png); 
+ 	background-repeat: no-repeat;
+ 	height: 100%;
+ 	width:50%;
+ 	margin: 0 auto;
 }
