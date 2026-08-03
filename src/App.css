@@ -1,0 +1,27 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: serif;
+}
+.app-layout {
+  display: flex;
+  height: 100vh;
+}
+
+.map-panel {
+  flex: 2;
+}
+
+.admin-panel {
+  flex: 1;
+}
+
+/* mobile */
+@media (max-width: 768px) {
+  .app-layout {
+    flex-direction: column;
+  }
+}
