@@ -1,7 +1,15 @@
 
+@font-face {
+  font-family: 'Blackadder ITC';
+  src: local('Blackadder ITC');
+}
 html,body{
 	background-color:rgba(0,0,0,0);
 	height:100%;
+}
+body {
+  margin: 0;
+  font-family: 'Blackadder ITC', serif;
 }
 html { 
   background: url(/src/assets/parchment.jpg) no-repeat center center fixed; 

@@ -1,0 +1,13 @@
+.sitting  { animation: pulse 3s ease-in-out infinite; }
+.standing { animation: bob 1.5s ease-in-out infinite; }
+.wandering { animation: wander 4s ease-in-out infinite; }
+@keyframes pulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.3); }
+}
+
+@keyframes bob {
+  0%, 100% { transform: translate(-50%, -50%) translateY(0); }
+  50% { transform: translate(-50%, -50%) translateY(-4px); }
+}
+
