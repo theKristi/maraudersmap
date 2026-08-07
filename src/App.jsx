@@ -2,7 +2,7 @@
 import './App.css'
 import { GreatHall } from './components/GreatHall'
 import { Library } from './components/Library'
-import { useState, useEffect } from 'react'
+import { useState} from 'react'
 import useStudents from './hooks/useStudents'
 import getLocation from './utils/getLocation'
 import getCurrentRoom from './utils/getCurrentRoom'
@@ -11,7 +11,6 @@ import getCurrentRoom from './utils/getCurrentRoom'
 function App() {
   const [currentRoom, setCurrentRoom] = useState(() => getCurrentRoom())
   const { students } = useStudents()
-  const location = getLocation()
   const studentsInGreatHall = students.filter(s => getLocation(s.house) === "great-hall")
   const studentsInLibrary = students.filter(s => getLocation(s.house) === "library").slice(0,20);
   const roomComponents = {
