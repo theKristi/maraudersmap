@@ -2,20 +2,22 @@
 import './App.css'
 import { GreatHall } from './components/GreatHall'
 import { Library } from './components/Library'
-import { useState} from 'react'
+import { useState, type JSX} from 'react'
 import useStudents from './hooks/useStudents'
 import getLocation from './utils/getLocation'
 import getCurrentRoom from './utils/getCurrentRoom'
+import type {Room} from './types'
 
 
 function App() {
-  const [currentRoom, setCurrentRoom] = useState(() => getCurrentRoom())
+  const [currentRoom, setCurrentRoom]= useState(() => getCurrentRoom())
   const { students } = useStudents()
   const studentsInGreatHall = students.filter(s => getLocation(s.house) === "great-hall")
   const studentsInLibrary = students.filter(s => getLocation(s.house) === "library").slice(0,20);
-  const roomComponents = {
+  const roomComponents: Record<Room, JSX.Element> = {
     "great-hall": <GreatHall students={studentsInGreatHall} />,
     "library": <Library students={studentsInLibrary} />,
+    //"Gryffindor-common-room": 
   }
   return (
 
