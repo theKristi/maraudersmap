@@ -3,10 +3,10 @@ import librarySvg from '../assets/library.svg'
 import type { Student, Position } from '../types'
 
 export function Library({ students }: {students:Student[]}) {
-    const TABLE_SEATS:Position[] = [
+     const TABLE_SEATS: Position[] = [
         // Table 1
-        { left: 46, top: 27 },
-        { left: 46, top: 31},
+        { left: 46, top: 27},
+        { left: 46, top: 31 },
         // Table 2
         { left: 57.5, top: 27 },
         { left: 57.5, top: 31 },
@@ -23,9 +23,9 @@ export function Library({ students }: {students:Student[]}) {
         { left: 57.5, top: 43 },
         { left: 57.5, top: 47 },
         { left: 82.5, top: 58.2 },
-        { left: 87.7, top: 58.2},
+        { left: 87.7, top: 58.2 },
         { left: 93.2, top: 58.4 },
-        { left: 82.2, top: 46.7},
+        { left: 82.2, top: 46.7 },
         { left: 93.6, top: 47.0 },
     ]
     const PATHS = [
@@ -35,6 +35,13 @@ export function Library({ students }: {students:Student[]}) {
         { minX: 28.2, maxX: 32.7, minY: 24.0, maxY: 75.5 }, // left vertical aisle
         { minX: 36.0, maxX: 66.2, minY: 31.5, maxY: 38.7 }, // horizontal aisle between table rows 1 and 2
         { minX: 36.0, maxX: 66.2, minY: 40.4, maxY: 44.0 }, // horizontal aisle between table rows 2 and 3
+        { minX: 32.4, maxX: 70.0, minY: 48.7, maxY: 52.1 }, // horizontal aisle below table row 3
+        { minX: 32.3, maxX: 70.8, minY: 54.0, maxY: 55.8 }, // horizontal aisle
+        { minX: 32.4, maxX: 70.8, minY: 57.3, maxY: 59.2 }, // horizontal aisle
+        { minX: 32.4, maxX: 70.8, minY: 60.7, maxY: 63.1 }, // horizontal aisle
+        { minX: 32.6, maxX: 70.9, minY: 64.6, maxY: 66.4 }, // horizontal aisle
+        { minX: 32.5, maxX: 70.6, minY: 68.1, maxY: 69.8 }, // horizontal aisle
+        { minX: 32.2, maxX: 71.3, minY: 71.8, maxY: 75.3 }, // horizontal aisle
     ]
     return (
         <div
