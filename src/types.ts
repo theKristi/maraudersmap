@@ -1,12 +1,14 @@
-type Position = {
+export type Position = {
   top: number
   left: number
 };
-type Student = {
+export type House = "Gryffindor" | "Ravenclaw" | "Hufflepuff" | "Slytherin"
+
+export type Student = {
   id: number
   firstName: string
   lastName: string
-  house: string
+  house: House
 };
 export type Path = {
   minX: number

@@ -37,11 +37,11 @@ export function StudentDot({ position, student, paths }: StudentDotProps) {
         }, [behavior])
         const left = behavior === "wandering"
             ? `${wanderOffset.x}%`
-            : position.left
+            : `${position.left}%`
 
         const top = behavior === "wandering"
             ? `${wanderOffset.y}%`
-            : position.top
+            : `${position.top}%`
         return (<div style={{ position: "absolute", left: left, top: top, transform: "translate(-50%, -50%)", transition: "left 10.5s ease-in-out, top 10.5s ease-in-out", textAlign: "center", fontSize: "1.5rem" }} className={behavior}>
             <div style={{
                 width: "6px",
