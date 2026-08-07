@@ -8,7 +8,7 @@ type Student = {
   lastName: string
   house: string
 };
-type Path = {
+export type Path = {
   minX: number
   maxX: number
   minY: number

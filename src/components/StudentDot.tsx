@@ -1,10 +1,9 @@
 import './StudentDot.css'
-import { Component, useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import { Path, StudentDotProps } from '../types'
 
 
-export class StudentDot extends Component<StudentDotProps> {
-    render() {
-        const { position, student, paths } = this.props
+export function StudentDot({ position, student, paths }: StudentDotProps) {
         const [currentPathIndex] = useState(() =>
             paths ? Math.floor(Math.random() * paths.length) : 0
         )
@@ -54,4 +53,3 @@ export class StudentDot extends Component<StudentDotProps> {
             <div className="student-name" style={{ textShadow: "0 0 4px #e8d5a3, 0 0 4px #e8d5a3" }}>{student.firstName} {student.lastName}</div>
         </div>)
     }
-}
