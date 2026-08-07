@@ -14,8 +14,8 @@ export type Path = {
   minY: number
   maxY: number
 };
-type StudentDotProps = {
+export type StudentDotProps = {
   position: Position
   student: Student
-  paths?: Path[]
+  paths: Path[]
 };

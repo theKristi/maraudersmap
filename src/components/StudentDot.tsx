@@ -1,6 +1,6 @@
 import './StudentDot.css'
 import { useEffect, useMemo, useState } from 'react'
-import { Path, StudentDotProps } from '../types'
+import type { Path, StudentDotProps } from '../types'
 
 
 export function StudentDot({ position, student, paths }: StudentDotProps) {
