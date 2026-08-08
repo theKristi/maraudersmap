@@ -1,4 +1,6 @@
-const students = [
+import type {Student} from '../types'
+
+const students:Student[] = [
   { id: 0, firstName: "Fred", lastName: "Weasley", house: "Gryffindor" },
   { id: 1, firstName: "George", lastName: "Weasley", house: "Gryffindor" },
   { id: 2, firstName: "Harry", lastName: "Potter", house: "Gryffindor" },

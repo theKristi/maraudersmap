@@ -1,31 +1,32 @@
 import { StudentDot } from './StudentDot'
 import librarySvg from '../assets/library.svg'
+import type { Student, Position } from '../types'
 
-export function Library({ students }) {
-    const TABLE_SEATS = [
+export function Library({ students }: {students:Student[]}) {
+     const TABLE_SEATS: Position[] = [
         // Table 1
-        { left: "46%", top: "27%" },
-        { left: "46%", top: "31%" },
+        { left: 46, top: 27},
+        { left: 46, top: 31 },
         // Table 2
-        { left: "57.5%", top: "27%" },
-        { left: "57.5%", top: "31%" },
+        { left: 57.5, top: 27 },
+        { left: 57.5, top: 31 },
         // Table 3
-        { left: "46%", top: "37.5%" },
-        { left: "46%", top: "41.5%" },
+        { left: 46, top: 37.5 },
+        { left: 46, top: 41.5 },
         // Table 4
-        { left: "57.5%", top: "37.5%" },
-        { left: "57.5%", top: "41.5%" },
+        { left: 57.5, top: 37.5 },
+        { left: 57.5, top: 41.5 },
         // Table 5
-        { left: "46%", top: "43%" },
-        { left: "46%", top: "47%" },
+        { left: 46, top: 43 },
+        { left: 46, top: 47 },
         // Table 6
-        { left: "57.5%", top: "43%" },
-        { left: "57.5%", top: "47%" },
-        { left: "82.5%", top: "58.2%" },
-        { left: "87.7%", top: "58.2%" },
-        { left: "93.2%", top: "58.4%" },
-        { left: "82.2%", top: "46.7%" },
-        { left: "93.6%", top: "47.0%" },
+        { left: 57.5, top: 43 },
+        { left: 57.5, top: 47 },
+        { left: 82.5, top: 58.2 },
+        { left: 87.7, top: 58.2 },
+        { left: 93.2, top: 58.4 },
+        { left: 82.2, top: 46.7 },
+        { left: 93.6, top: 47.0 },
     ]
     const PATHS = [
         { minX: 49, maxX: 55.3, minY: 4.4, maxY: 95.6 }, // center vertical aisle
