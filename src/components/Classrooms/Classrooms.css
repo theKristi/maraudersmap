@@ -1,0 +1,33 @@
+.classrooms-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.classroom-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 8px;
+  z-index: 10;
+
+}
+
+.classroom-nav button {
+  background: none;
+  border: 1px solid #5c3d0a;
+  color: #3d1f00;
+  font-family: 'Blackadder ITC', serif;
+  font-size: 1.5rem;
+  padding: 4px 12px;
+  cursor: pointer;
+}
+
+.classroom-nav span {
+  font-family: 'Blackadder ITC', serif;
+  color: #3d1f00;
+  font-size: 1.2rem;
+  min-width: 120px;
+  text-align: center;
+}

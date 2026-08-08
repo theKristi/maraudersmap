@@ -7,6 +7,7 @@ import useStudents from './hooks/useStudents'
 import getLocation from './utils/getLocation'
 import getCurrentRoom from './utils/getCurrentRoom'
 import type {Room} from './types'
+import { Classrooms } from './components/Classrooms/Classrooms'
 
 
 function App() {
@@ -14,9 +15,11 @@ function App() {
   const { students } = useStudents()
   const studentsInGreatHall = students.filter(s => getLocation(s.house) === "great-hall")
   const studentsInLibrary = students.filter(s => getLocation(s.house) === "library").slice(0,20);
+  const studentsInClass = students.filter(s => getLocation(s.house)=== "classrooms").slice(0,15); 
   const roomComponents: Record<Room, JSX.Element> = {
     "great-hall": <GreatHall students={studentsInGreatHall} />,
     "library": <Library students={studentsInLibrary} />,
+    "classrooms": <Classrooms students={studentsInClass}/>
     //"Gryffindor-common-room": 
   }
   return (
@@ -29,6 +32,7 @@ function App() {
         <div className="nav-buttons">
           <button onClick={() => setCurrentRoom("great-hall")}>Great Hall</button>
           <button onClick={() => setCurrentRoom("library")}>Library</button>
+          <button onClick={() => setCurrentRoom("classrooms")}>classrooms</button>
         </div>
       </div>
     </div>

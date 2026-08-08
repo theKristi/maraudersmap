@@ -2,7 +2,7 @@ import type { Room } from "../types"
 
 function getCurrentRoom():Room {
   //Sconst hour:number = new Date().getHours()
-  return "library"
+  return "classrooms"
   /*if (hour < 6 || hour === 23) return "dormitory"
   if (hour >= 6 && hour <= 7) return "great-hall"
   if (hour >= 8 && hour <= 14) return "classrooms"

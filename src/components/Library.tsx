@@ -1,6 +1,6 @@
 import { StudentDot } from './StudentDot'
 import librarySvg from '../assets/library.svg'
-import type { Student, Position } from '../types'
+import type { Student, Position, Path } from '../types'
 
 export function Library({ students }: {students:Student[]}) {
      const TABLE_SEATS: Position[] = [
@@ -28,7 +28,7 @@ export function Library({ students }: {students:Student[]}) {
         { left: 82.2, top: 46.7 },
         { left: 93.6, top: 47.0 },
     ]
-    const PATHS = [
+    const PATHS:Path[] = [
         { minX: 49, maxX: 55.3, minY: 4.4, maxY: 95.6 }, // center vertical aisle
         { minX: 32, maxX: 70.1, minY: 23.9, maxY: 27.3 }, // top horizontal aisle
         { minX: 70, maxX: 74.6, minY: 23.8, maxY: 74.4 }, // right vertical aisle

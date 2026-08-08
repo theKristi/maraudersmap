@@ -21,4 +21,4 @@ export type StudentDotProps = {
   student: Student
   paths: Path[]
 };
-export type Room = "great-hall"  | "library"//| "classrooms" | "Gryffindor-dormitory" | "Ravenclaw-dormitory" | "Hufflepuff-dormitory" | "Slytherin-dormitory" | "Gryffindor-common-room" | "Ravenclaw-common-room" | "Hufflepuff-common-room" | "Slytherin-common-room"
+export type Room = "great-hall"  | "library"| "classrooms" //| "Gryffindor-dormitory" | "Ravenclaw-dormitory" | "Hufflepuff-dormitory" | "Slytherin-dormitory" | "Gryffindor-common-room" | "Ravenclaw-common-room" | "Hufflepuff-common-room" | "Slytherin-common-room"
