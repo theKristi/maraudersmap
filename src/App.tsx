@@ -38,18 +38,33 @@ function App() {
   }
   return (
 
-    <div className="app-layout">
-      <div
-        className={`map-panel ${isTransitioning ? 'fold-out' : 'fold-in'}`}
-        onAnimationEnd={isTransitioning ? handleFoldOut : undefined}
-      >
-        {roomComponents[displayedRoom]}
-      </div>
-      <div className="admin-panel">
-        <div className="nav-buttons">
-          <button onClick={() => navigateTo("great-hall")}>Great Hall</button>
-          <button onClick={() => navigateTo("library")}>Library</button>
-          <button onClick={() => navigateTo("classrooms")}>Classrooms</button>
+    <div className="app-shell">
+      <nav className="ribbon-nav">
+        <div className="ribbon-tabs">
+          <button
+            className={`ribbon-tab ${currentRoom === "great-hall" ? "active" : ""}`}
+            onClick={() => navigateTo("great-hall")}
+          >Great Hall</button>
+          <button
+            className={`ribbon-tab ${currentRoom === "library" ? "active" : ""}`}
+            onClick={() => navigateTo("library")}
+          >Library</button>
+          <button
+            className={`ribbon-tab ${currentRoom === "classrooms" ? "active" : ""}`}
+            onClick={() => navigateTo("classrooms")}
+          >Classrooms</button>
+        </div>
+      </nav>
+      <div className="app-layout">
+        <div
+          className={`map-panel ${isTransitioning ? 'fold-out' : 'fold-in'}`}
+          onAnimationEnd={(e) => {
+            if (isTransitioning && e.target === e.currentTarget) handleFoldOut()
+          }}
+        >
+          {roomComponents[displayedRoom]}
+        </div>
+        <div className="admin-panel">
         </div>
       </div>
     </div>

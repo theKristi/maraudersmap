@@ -55,17 +55,6 @@ export function Library({ students }: {students:Student[]}) {
         >
 
             <img src={librarySvg} className="room-map" alt="Library" />
-            {PATHS.map((path, i) => (
-                <div key={i} style={{
-                    position: "absolute",
-                    left: `${path.minX}%`,
-                    top: `${path.minY}%`,
-                    width: `${path.maxX - path.minX}%`,
-                    height: `${path.maxY - path.minY}%`,
-                    background: "rgba(0, 255, 0, 0.3)",
-                    zIndex: 998
-                }} />
-            ))}
             <div className="dots-container">
                 {students.map((s, index) => {
                     const position = TABLE_SEATS[index % TABLE_SEATS.length]

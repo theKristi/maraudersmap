@@ -49,30 +49,6 @@ export function CharmsClassroom({ students }: { students: Student[] }) {
             >
 
                 <img src={charmsClassSvg} className="room-map" alt="Charms Classroom" />
-                {PATHS.map((path, i) => (
-                    <div key={i} style={{
-                        position: "absolute",
-                        left: `${path.minX}%`,
-                        top: `${path.minY}%`,
-                        width: `${path.maxX - path.minX}%`,
-                        height: `${path.maxY - path.minY}%`,
-                        background: "rgba(0, 255, 0, 0.3)",
-                        zIndex: 998
-                    }} />
-                ))}
-                {TABLE_SEATS.map((seat, i) => (
-                    <div key={i} style={{
-                        position: "absolute",
-                        left: `${seat.left}%`,
-                        top: `${seat.top}%`,
-                        width: "10px",
-                        height: "10px",
-                        borderRadius: "50%",
-                        background: "red",
-                        transform: "translate(-50%, -50%)",
-                        zIndex: 999
-                    }} />
-                ))}
                 <div className="dots-container">
                     {students.map((s, index) => {
                         const position = TABLE_SEATS[index % TABLE_SEATS.length]
