@@ -39,8 +39,8 @@ function App() {
   return (
 
     <div className="app-layout">
-      <div 
-        className={`map-panel ${isTransitioning ? 'fold-out' : 'fold-in'}`} 
+      <div
+        className={`map-panel ${isTransitioning ? 'fold-out' : 'fold-in'}`}
         onAnimationEnd={isTransitioning ? handleFoldOut : undefined}
       >
         {roomComponents[displayedRoom]}
@@ -48,8 +48,8 @@ function App() {
       <div className="admin-panel">
         <div className="nav-buttons">
           <button onClick={() => navigateTo("great-hall")}>Great Hall</button>
-<button onClick={() => navigateTo("library")}>Library</button>
-<button onClick={() => navigateTo("classrooms")}>Classrooms</button>
+          <button onClick={() => navigateTo("library")}>Library</button>
+          <button onClick={() => navigateTo("classrooms")}>Classrooms</button>
         </div>
       </div>
     </div>
