@@ -15,7 +15,14 @@ export function Classrooms({ students }: { students: Student[] }) {
   ]
 
   return (
-    <div className="classrooms-container">
+    <div className="classrooms-container"
+     onClick={(e) => {
+                const rect = e.currentTarget.getBoundingClientRect()
+                const x = ((e.clientX - rect.left) / rect.width * 100).toFixed(1)
+                const y = ((e.clientY - rect.top) / rect.height * 100).toFixed(1)
+                console.log(`left: "${x}%", top: "${y}%"`)
+            }}
+    >
       <div className="classroom-nav">
         <button onClick={() => setCurrentIndex(i => Math.max(0, i - 1))}>←</button>
         <span>{CLASSROOMS[currentIndex]}</span>
