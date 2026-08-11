@@ -15,15 +15,16 @@ body {
   display: flex;
   flex: 1;
   min-height: 0;
+  perspective: 2200px;
 }
 
 .map-panel {
-  flex: 2;
-}
-
-
-.admin-panel {
   flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  min-width: 0;
 }
 
 /* mobile */
@@ -117,8 +118,29 @@ body {
 }
 .room-container {
   position: relative;
-  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  /* aspect-ratio is set per-room (inline, matching that room's SVG viewBox).
+     width/height are left auto (NOT 100%) — an explicit width pins that
+     dimension as authoritative, so once max-height clamps the other one,
+     the browser won't shrink width back down to match (it just stretches/
+     distorts). Leaving both auto lets the aspect-ratio + max-width/
+     max-height box-sizing algorithm pick whichever is the binding
+     constraint and derive the other from the ratio, like object-fit:
+     contain but for the container itself. Needs a parent with
+     align-items:center (map-panel / classrooms-container) so it isn't
+     stretched to fill instead. The seat coordinates are percentages of
+     this box, so it must exactly match the visible image, never gap
+     around it — that's why it's a shrink-to-fit box rather than
+     object-fit letterboxing, which would leave gaps the percentages
+     don't account for. */
   animation: inkReveal 1.5s ease-in-out forwards;
+}
+
+.room-map {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 @keyframes inkReveal {
   from { clip-path: inset(0 100% 100% 0); }
@@ -134,74 +156,140 @@ body {
   from { opacity: 0; }
   to   { opacity: 1; }
 }
+/* Room transition: the same fold used by the admin drawer (rotateY +
+   translateX together, hinged at the edge), mirrored for the left side —
+   the outgoing room tucks away behind the left edge, the incoming room
+   unfolds back down flat from there. */
 .fold-out, .fold-in {
   position: relative;
   transform-origin: left center;
+  backface-visibility: hidden;
 }
 
 .fold-out {
-  animation: foldOut 0.6s ease-in forwards;
+  animation: pageFoldOut 0.5s ease forwards;
 }
 
 .fold-in {
-  animation: foldIn 0.6s ease-out forwards;
+  animation: pageFoldIn 0.5s ease forwards;
 }
 
-/* crease shading: pleats of alternating light/dark that pulse in as the
-   parchment collapses, so the shrink reads as folding rather than scaling */
+@keyframes pageFoldOut {
+  0%   { transform: rotateY(0deg) translateX(0%); }
+  100% { transform: rotateY(35deg) translateX(-100%); }
+}
+
+@keyframes pageFoldIn {
+  0%   { transform: rotateY(35deg) translateX(-100%); }
+  100% { transform: rotateY(0deg) translateX(0%); }
+}
+
+/* same straight fade-to-black crease as the drawer, mirrored to the left
+   hinge, peaking while the page is folded away */
 .fold-out::after, .fold-in::after {
   content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
   z-index: 1000;
-  background: repeating-linear-gradient(
-    90deg,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 0) 5%,
-    rgba(40, 25, 5, 0.45) 8%,
-    rgba(255, 248, 220, 0.35) 11%,
-    rgba(0, 0, 0, 0) 14%,
-    rgba(0, 0, 0, 0) 16.6%
-  );
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 18%);
   opacity: 0;
 }
 
 .fold-out::after {
-  animation: creaseIn 0.6s ease-in forwards;
+  animation: creaseIn 0.5s ease forwards;
 }
 
 .fold-in::after {
-  animation: creaseOut 0.6s ease-out forwards;
-}
-
-@keyframes foldOut {
-  0%   { transform: scaleX(1) skewY(0deg); opacity: 1; }
-  20%  { transform: scaleX(0.8) skewY(-0.3deg); opacity: 1; }
-  40%  { transform: scaleX(0.55) skewY(-0.5deg); opacity: 0.95; }
-  60%  { transform: scaleX(0.32) skewY(-0.4deg); opacity: 0.85; }
-  80%  { transform: scaleX(0.12) skewY(-0.2deg); opacity: 0.5; }
-  100% { transform: scaleX(0) skewY(0deg); opacity: 0; }
-}
-
-@keyframes foldIn {
-  0%   { transform: scaleX(0) skewY(0deg); opacity: 0; }
-  15%  { transform: scaleX(0.15) skewY(-0.2deg); opacity: 0.4; }
-  35%  { transform: scaleX(0.4) skewY(-0.4deg); opacity: 0.75; }
-  55%  { transform: scaleX(0.7) skewY(-0.5deg); opacity: 0.9; }
-  75%  { transform: scaleX(1.02) skewY(-0.2deg); opacity: 1; }
-  90%  { transform: scaleX(0.99) skewY(0deg); opacity: 1; }
-  100% { transform: scaleX(1) skewY(0deg); opacity: 1; }
+  animation: creaseOut 0.5s ease forwards;
 }
 
 @keyframes creaseIn {
   0%   { opacity: 0; }
-  50%  { opacity: 1; }
-  100% { opacity: 0.9; }
+  100% { opacity: 1; }
 }
 
 @keyframes creaseOut {
-  0%   { opacity: 0.9; }
-  40%  { opacity: 0.7; }
+  0%   { opacity: 1; }
   100% { opacity: 0; }
+}
+
+/* Admin drawer: a parchment sheet hinged at the right edge of the screen
+   that folds over into view, like turning a page corner back. */
+.admin-tab {
+  position: fixed;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-family: inherit;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  padding: 16px 8px;
+  background: linear-gradient(180deg, #8a2626 0%, #6b1b1b 100%);
+  color: #f3e3b3;
+  border: 2px solid #d4af37;
+  border-right: none;
+  border-radius: 8px 0 0 8px;
+  cursor: pointer;
+  box-shadow: -3px 0 8px rgba(0, 0, 0, 0.4);
+  z-index: 600;
+  transition: right 0.5s ease;
+}
+
+.admin-tab.open {
+  right: 320px;
+}
+
+.admin-drawer-wrap {
+  position: fixed;
+  top: 64px;
+  right: 0;
+  bottom: 0;
+  width: 320px;
+  perspective: 1400px;
+  pointer-events: none;
+  z-index: 500;
+}
+
+.admin-drawer {
+  position: absolute;
+  inset: 0;
+  pointer-events: auto;
+  padding: 20px;
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(255, 255, 255, 0.15), transparent 60%),
+    url(/src/assets/parchment.jpg) center center / cover no-repeat;
+  color: #3a2a12;
+  border-left: 3px solid #7a5a1e;
+  box-shadow: -8px 0 20px rgba(0, 0, 0, 0.45);
+  transform-origin: right center;
+  transform: rotateY(-35deg) translateX(100%);
+  transition: transform 0.5s ease;
+}
+
+.admin-drawer.open {
+  transform: rotateY(0deg) translateX(0%);
+}
+
+/* crease shading along the hinge, fading in as the sheet folds flat —
+   a straight fade to black at the edge, so it reads as a fold, not a roll */
+.admin-drawer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0) 82%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.admin-drawer.open::after {
+  opacity: 1;
 }

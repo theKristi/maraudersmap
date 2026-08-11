@@ -23,6 +23,7 @@ export function GreatHall({students}: {students: Student[]}) {
     return (
         <div
             className="room-container"
+            style={{ aspectRatio: "639.91 / 926.37" }}
             onClick={(e) => {
                 const rect = e.currentTarget.getBoundingClientRect()
                 const x = ((e.clientX - rect.left) / rect.width * 100).toFixed(1)

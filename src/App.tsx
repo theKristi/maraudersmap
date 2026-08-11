@@ -10,6 +10,7 @@ import type { Room } from './types'
 import { Classrooms } from './components/Classrooms/Classrooms'
 
 
+
 function App() {
 
   const { students } = useStudents()
@@ -25,6 +26,7 @@ function App() {
   const [currentRoom, setCurrentRoom] = useState<Room>(() => getCurrentRoom())
   const [displayedRoom, setDisplayedRoom] = useState<Room>(currentRoom)
   const [isTransitioning, setIsTransitioning] = useState(false)
+  const [isAdminOpen, setIsAdminOpen] = useState(false)
 
   const navigateTo = (room: Room) => {
     if (room === displayedRoom || isTransitioning) return
@@ -64,7 +66,17 @@ function App() {
         >
           {roomComponents[displayedRoom]}
         </div>
-        <div className="admin-panel">
+      </div>
+      <button
+        className={`admin-tab ${isAdminOpen ? 'open' : ''}`}
+        onClick={() => setIsAdminOpen(open => !open)}
+      >
+        {isAdminOpen ? 'Close' : 'Admin'}
+      </button>
+      <div className="admin-drawer-wrap">
+        <div className={`admin-drawer ${isAdminOpen ? 'open' : ''}`}>
+          <h2>Admin</h2>
+          <p>Student management controls go here.</p>
         </div>
       </div>
     </div>

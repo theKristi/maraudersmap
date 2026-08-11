@@ -32,7 +32,7 @@ export function StudentDot({ position, student, paths }: StudentDotProps) {
                 timeout = setTimeout(step, 10000 + Math.random() * 3000)
             }
 
-            timeout = setTimeout(step, 10000 + Math.random() * 3000)
+            timeout = setTimeout(step, 1000 + Math.random() * 2000)
             return () => clearTimeout(timeout)
         }, [behavior])
         const left = behavior === "wandering"
