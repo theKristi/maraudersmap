@@ -6,7 +6,7 @@ function getLocation(student:Student): Room{
     for( const block of student.schedule)
     {
         if(block.start <= hour && hour <= block.end)
-            room = block.room
+            return block.room
 
     }
     return room 

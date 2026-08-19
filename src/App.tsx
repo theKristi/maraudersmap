@@ -5,9 +5,7 @@ import { Library } from './components/Library'
 import { useState, type JSX } from 'react'
 import useStudents from './hooks/useStudents'
 import getLocation from './utils/getLocation'
-import getCurrentRoom from './utils/getCurrentRoom'
 import type { Room } from './types'
-import { Classrooms } from './components/Classrooms/Classrooms'
 import { CharmsClassroom } from './components/Classrooms/Charms_class'
 import { TransfigurationClassroom } from './components/Classrooms/Transfiguration_class'
 
@@ -16,18 +14,18 @@ import { TransfigurationClassroom } from './components/Classrooms/Transfiguratio
 function App() {
 
   const { students } = useStudents()
-  const studentsInGreatHall = students.filter(s => getLocation(s.house) === "Great-Hall")
-  const studentsInLibrary = students.filter(s => getLocation(s.house) === "Library")
-  const studentsInCharms = students.filter(s => getLocation(s.house) === "Charms-Classroom")
-  const studentsInTransfiguration = students.filter(s => getLocation(s.house) === "Transfiguration-Classroom")
-  const roomComponents: Record<Room, JSX.Element> = {
+  const studentsInGreatHall = students.filter(s => getLocation(s) === "Great-Hall")
+  const studentsInLibrary = students.filter(s => getLocation(s) === "Library")
+  const studentsInCharms = students.filter(s => getLocation(s) === "Charms-Classroom")
+  const studentsInTransfiguration = students.filter(s => getLocation(s) === "Transfiguration-Classroom")
+  const roomComponents: Partial<Record<Room, JSX.Element>> = {
     "Great-Hall": <GreatHall students={studentsInGreatHall} />,
     "Library": <Library students={studentsInLibrary} />,
     "Charms-Classroom": <CharmsClassroom students={studentsInCharms} />,
     "Transfiguration-Classroom":<TransfigurationClassroom students={studentsInTransfiguration} />,
     //"Gryffindor-common-room": 
   }
-  const [currentRoom, setCurrentRoom] = useState<Room>(() => getCurrentRoom())
+  const [currentRoom, setCurrentRoom] = useState<Room>("Great-Hall")
   const [displayedRoom, setDisplayedRoom] = useState<Room>(currentRoom)
   const [isTransitioning, setIsTransitioning] = useState(false)
   const [isAdminOpen, setIsAdminOpen] = useState(false)
@@ -55,10 +53,6 @@ function App() {
             className={`ribbon-tab ${currentRoom === "Library" ? "active" : ""}`}
             onClick={() => navigateTo("Library")}
           >Library</button>
-          <button
-            className={`ribbon-tab ${currentRoom === "classrooms" ? "active" : ""}`}
-            onClick={() => navigateTo("classrooms")}
-          >Classrooms</button>
         </div>
       </nav>
       <div className="app-layout">
@@ -68,7 +62,7 @@ function App() {
             if (isTransitioning && e.target === e.currentTarget) handleFoldOut()
           }}
         >
-          {roomComponents[displayedRoom]}
+          {roomComponents[displayedRoom] ?? null}
         </div>
       </div>
       <button
