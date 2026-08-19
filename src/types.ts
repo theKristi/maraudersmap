@@ -8,7 +8,8 @@ export type Student = {
   id: number
   firstName: string
   lastName: string
-  house: House
+  house: House,
+  schedule: ScheduleBlock[]
 };
 export type Path = {
   minX: number
@@ -33,3 +34,9 @@ export type Room = "Great-Hall"  |
                    "Ravenclaw-Common-Room" | 
                    "Hufflepuff-Common-Room" | 
                    "Slytherin-Common-Room"
+
+export type ScheduleBlock = {
+    room: Room
+    start: number
+    end: number
+}

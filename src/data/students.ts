@@ -1,6 +1,7 @@
-import type {Student} from '../types'
+import type {House, Student} from '../types'
+import { generateSchedule } from '../utils/scheduleTemplates';
 
-const students:Student[] = [
+const studentsSeed:{ id: number, firstName: string, lastName: string, house: House }[]  = [
   { id: 0, firstName: "Fred", lastName: "Weasley", house: "Gryffindor" },
   { id: 1, firstName: "George", lastName: "Weasley", house: "Gryffindor" },
   { id: 2, firstName: "Harry", lastName: "Potter", house: "Gryffindor" },
@@ -52,5 +53,12 @@ const students:Student[] = [
   { id: 49, firstName: "Peter", lastName: "Pettigrew", house: "Gryffindor" },
   { id: 50, firstName: "Pansy", lastName: "Parkinson", house: "Slytherin" },
 ];
+const students: Student[]= studentsSeed.map(s => ({
+  id:s.id, 
+  firstName:s.firstName, 
+  lastName:s.lastName, 
+  house:s.house, 
+  schedule: generateSchedule(s.house)
+}));
 
 export default students;

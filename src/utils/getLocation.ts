@@ -1,20 +1,15 @@
-import type { House, Room } from "../types";
+import type { Room, Student } from "../types";
 
-function getLocation(house: House): Room{
-   
+function getLocation(student:Student): Room{
+    let room:Room= `${student.house}-Dormitory`;
     const hour=new Date().getHours();
-    /* if(hour >=0 && hour<6 || hour===23)
-        return "dormitory";*/
-     if(hour >=6 && hour<=7 || hour>=17 && hour<=18)
-        return "Great-Hall";
-    if(hour >=8 && hour<=14)
-        return "classroom";
-    if(hour>=15 && hour<=16)
-        return "library";
-    /*if(hour>=19 && hour<=22)
-        return `${house}-common-room`;
-     return `${house}-dormitory`;*/
-     return "classrooms"
+    for( const block of student.schedule)
+    {
+        if(block.start <= hour && hour <= block.end)
+            room = block.room
+
+    }
+    return room 
  
 }
 export default getLocation;

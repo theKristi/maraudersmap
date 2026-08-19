@@ -1,10 +1,6 @@
-import type { House, Room } from "../types"
+import type { House, ScheduleBlock } from "../types"
 
-export type ScheduleBlock = {
-    room: Room
-    start: number
-    end: number
-}
+
 export function generateSchedule(house:House):ScheduleBlock[] {
     const blocks: ScheduleBlock[]=[
         { room: `${house}-Dormitory`, start:0, end:5}, 
