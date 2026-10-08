@@ -40,3 +40,9 @@ export type ScheduleBlock = {
     start: number
     end: number
 }
+export type ZoneConfig = {
+  room: Room
+  label: string
+  asset: string        // import path or imported SVG
+  gridArea: string     // matches a named area in your CSS grid
+}
