@@ -3,6 +3,7 @@ import "./Zone.css"
 
 function Zone({ config, students, isHovered, onHover, onLeave, onClick }: ZoneProps) {
   const count = students.length
+  const [canvasWidth, canvasHeight] = config.canvas ?? [1920, 1080]
 
   return (
     <button
@@ -16,7 +17,9 @@ function Zone({ config, students, isHovered, onHover, onLeave, onClick }: ZonePr
       onClick={onClick}
       aria-label={`${config.label}, ${count} ${count === 1 ? "student" : "students"}`}
     >
-      <img className="zone__image" src={config.asset} alt="" />
+      <svg className="zone__image" viewBox={config.viewBox} aria-hidden="true">
+        <image href={config.asset} width={canvasWidth} height={canvasHeight} />
+      </svg>
       <span className="zone__label">{config.label}</span>
       {count > 0 && <span className="zone__count">{count}</span>}
       {isHovered && count > 0 && (

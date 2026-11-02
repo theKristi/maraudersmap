@@ -44,7 +44,9 @@ export type ZoneConfig = {
   room: Room
   label: string
   asset: string        // import path or imported SVG
-  gridArea: string     // matches a named area in your CSS grid
+  gridArea: string     // "row-start / col-start / row-end / col-end" on the 1920x1080 grid
+  viewBox: string      // region of the asset canvas to show
+  canvas?: [number, number]  // asset canvas size, defaults to 1920x1080
 }
 export type ZoneProps = {
   config: ZoneConfig
