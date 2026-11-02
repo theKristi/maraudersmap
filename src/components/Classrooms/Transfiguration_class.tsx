@@ -1,6 +1,6 @@
 import type { Student, Position, Path } from "../../types";
 import transfigurationClassSvg from '../../assets/transfiguration_class.svg'
-import { StudentDot } from '../StudentDot'
+import { StudentDot } from '../StudentDot/StudentDot'
 
 
 export function TransfigurationClassroom({ students }: { students: Student[] }) {

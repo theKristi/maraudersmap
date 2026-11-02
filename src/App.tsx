@@ -1,12 +1,13 @@
 
 import './App.css'
-import { GreatHall } from './components/GreatHall'
+import { GreatHall } from './components/GreatHall/GreatHall'
 import { Library } from './components/Library'
 import { useState, type JSX } from 'react'
 import useStudents from './hooks/useStudents'
 import getLocation from './utils/getLocation'
 import type { Room } from './types'
 import { CharmsClassroom } from './components/Classrooms/Charms_class'
+import MasterMap from './components/MasterMap/MasterMap'
 import { TransfigurationClassroom } from './components/Classrooms/Transfiguration_class'
 
 
@@ -28,9 +29,11 @@ function App() {
   const [currentRoom, setCurrentRoom] = useState<Room>("Great-Hall")
   const [displayedRoom, setDisplayedRoom] = useState<Room>(currentRoom)
   const [isTransitioning, setIsTransitioning] = useState(false)
+  const [showMap, setShowMap] = useState(false)
   const [isAdminOpen, setIsAdminOpen] = useState(false)
 
   const navigateTo = (room: Room) => {
+    setShowMap(false)
     if (room === displayedRoom || isTransitioning) return
     setCurrentRoom(room)      // store where we're going
     setIsTransitioning(true)  // trigger fold-out
@@ -46,11 +49,15 @@ function App() {
       <nav className="ribbon-nav">
         <div className="ribbon-tabs">
           <button
-            className={`ribbon-tab ${currentRoom === "Great-Hall" ? "active" : ""}`}
+            className={`ribbon-tab ${showMap ? "active" : ""}`}
+            onClick={() => setShowMap(true)}
+          >Master Map</button>
+          <button
+            className={`ribbon-tab ${!showMap && currentRoom === "Great-Hall" ? "active" : ""}`}
             onClick={() => navigateTo("Great-Hall")}
           >Great Hall</button>
           <button
-            className={`ribbon-tab ${currentRoom === "Library" ? "active" : ""}`}
+            className={`ribbon-tab ${!showMap && currentRoom === "Library" ? "active" : ""}`}
             onClick={() => navigateTo("Library")}
           >Library</button>
         </div>
@@ -62,7 +69,9 @@ function App() {
             if (isTransitioning && e.target === e.currentTarget) handleFoldOut()
           }}
         >
-          {roomComponents[displayedRoom] ?? null}
+          {showMap
+            ? <MasterMap students={students} onNavigate={navigateTo} />
+            : roomComponents[displayedRoom] ?? null}
         </div>
       </div>
       <button

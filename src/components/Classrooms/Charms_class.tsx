@@ -1,6 +1,6 @@
 import type { Student, Position, Path } from "../../types"
 import charmsClassSvg from '../../assets/charms_class.svg'
-import { StudentDot } from '../StudentDot'
+import { StudentDot } from '../StudentDot/StudentDot'
 
 
 export function CharmsClassroom({ students }: { students: Student[] }) {

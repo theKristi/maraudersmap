@@ -5,7 +5,9 @@ import type { Student } from '../types';
 function useStudents(){
     const [students, setStudents] = useState<Student[]>(() => {
         const saved = localStorage.getItem('students')
-        return saved ? JSON.parse(saved): seedStudents
+        // ignore cached data saved before students had a schedule
+        const parsed: Student[] | null = saved ? JSON.parse(saved) : null
+        return parsed?.every(s => Array.isArray(s.schedule)) ? parsed : seedStudents
     });
          //saving
     useEffect(() => {

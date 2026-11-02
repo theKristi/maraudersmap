@@ -46,3 +46,11 @@ export type ZoneConfig = {
   asset: string        // import path or imported SVG
   gridArea: string     // matches a named area in your CSS grid
 }
+export type ZoneProps = {
+  config: ZoneConfig
+  students: Student[]
+  isHovered: boolean
+  onHover: () => void
+  onLeave: () => void
+  onClick: () => void
+}
