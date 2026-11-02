@@ -7,6 +7,7 @@ import useStudents from './hooks/useStudents'
 import getLocation from './utils/getLocation'
 import type { Room } from './types'
 import { CharmsClassroom } from './components/Classrooms/Charms_class'
+import maraudersMap from './assets/master/marauders_map.svg'
 import MasterMap from './components/MasterMap/MasterMap'
 import { TransfigurationClassroom } from './components/Classrooms/Transfiguration_class'
 
@@ -46,22 +47,18 @@ function App() {
   return (
 
     <div className="app-shell">
-      <nav className="ribbon-nav">
-        <div className="ribbon-tabs">
-          <button
-            className={`ribbon-tab ${showMap ? "active" : ""}`}
-            onClick={() => setShowMap(true)}
-          >Master Map</button>
-          <button
-            className={`ribbon-tab ${!showMap && currentRoom === "Great-Hall" ? "active" : ""}`}
-            onClick={() => navigateTo("Great-Hall")}
-          >Great Hall</button>
-          <button
-            className={`ribbon-tab ${!showMap && currentRoom === "Library" ? "active" : ""}`}
-            onClick={() => navigateTo("Library")}
-          >Library</button>
-        </div>
-      </nav>
+      {!showMap && (
+        <button
+          type="button"
+          className="home-button"
+          onClick={() => setShowMap(true)}
+          aria-label="Master Map"
+        >
+          <svg viewBox="800 372 300 336" aria-hidden="true">
+            <image href={maraudersMap} width={1920} height={1080} />
+          </svg>
+        </button>
+      )}
       <div className="app-layout">
         <div
           className={`map-panel ${isTransitioning ? 'fold-out' : 'fold-in'}`}

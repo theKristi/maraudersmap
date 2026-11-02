@@ -33,7 +33,7 @@ const zones: ZoneConfig[] = [
   zone("Transfiguration-Classroom", "Transfiguration", transfiguration, [765, 325, 687, 612], [1310, 405, 500, 390]),
   zone("Charms-Classroom", "Charms", charms, [506, 197, 1010, 618], [1230, 15, 560, 350]),
   zone("Gryffindor-Common-Room", "Gryffindor Common Room", gryffindor, [805, 291, 236, 295], [40, 40, 265, 400]),
-  zone("Ravenclaw-Common-Room", "Ravenclaw Common Room", ravenclaw, [672, 173, 495, 501], [310, 90, 330, 405]),
+  zone("Ravenclaw-Common-Room", "Ravenclaw Common Room", ravenclaw, [672, 173, 495, 501], [355, 90, 330, 405]),
   zone("Hufflepuff-Common-Room", "Hufflepuff Common Room", hufflepuff, [12, 117, 577, 474], [10, 690, 350, 370], [596, 768]),
   zone("Slytherin-Common-Room", "Slytherin Common Room", slytherin, [687, 217, 512, 612], [375, 555, 265, 345]),
 ]
