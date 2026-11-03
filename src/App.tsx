@@ -8,6 +8,7 @@ import getLocation from './utils/getLocation'
 import type { Room } from './types'
 import { CharmsClassroom } from './components/Classrooms/Charms_class'
 import maraudersMap from './assets/master/marauders_map.svg'
+import AdminFold from './components/AdminFold/AdminFold'
 import MasterMap from './components/MasterMap/MasterMap'
 import { TransfigurationClassroom } from './components/Classrooms/Transfiguration_class'
 
@@ -71,18 +72,10 @@ function App() {
             : roomComponents[displayedRoom] ?? null}
         </div>
       </div>
-      <button
-        className={`admin-tab ${isAdminOpen ? 'open' : ''}`}
-        onClick={() => setIsAdminOpen(open => !open)}
-      >
-        {isAdminOpen ? 'Close' : 'Admin'}
-      </button>
-      <div className="admin-drawer-wrap">
-        <div className={`admin-drawer ${isAdminOpen ? 'open' : ''}`}>
-          <h2>Admin</h2>
-          <p>Student management controls go here.</p>
-        </div>
-      </div>
+      <AdminFold open={isAdminOpen} onOpen={() => setIsAdminOpen(true)} onClose={() => setIsAdminOpen(false)}>
+        <h2>Admin</h2>
+        <p>Student management controls go here.</p>
+      </AdminFold>
     </div>
   )
 }
