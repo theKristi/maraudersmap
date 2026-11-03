@@ -43,27 +43,18 @@
   top: 0;
   left: 0;
   transform-origin: 0 0;
-  padding: 20px;
+  padding: 72px 20px 20px;
   color: #3a2a12;
 }
 
+/* the panel's top-left corner, folded over: closes the panel */
 .admin-fold__close {
   position: absolute;
-  top: 8px;
-  right: 10px;
-  padding: 0 8px;
-  font-family: inherit;
-  font-size: 1.8rem;
-  line-height: 1;
-  color: #3a2a12;
-  background: none;
-  border: none;
   cursor: pointer;
-}
-
-.admin-fold__close:hover,
-.admin-fold__close:focus-visible {
-  color: #7f0909;
+  clip-path: polygon(100% 0, 0 100%, 100% 100%);
+  background:
+    linear-gradient(135deg, rgba(60, 35, 5, 0.55) 50%, rgba(60, 35, 5, 0.15) 65%, rgba(255, 255, 255, 0.18) 100%),
+    url(/src/assets/parchment.jpg) center / cover no-repeat;
 }
 
 /* the clickable corner flap, matching the folded triangle at rest */

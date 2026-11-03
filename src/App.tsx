@@ -73,12 +73,6 @@ function App() {
         </div>
       </div>
       <AdminFold open={isAdminOpen} onOpen={() => setIsAdminOpen(true)} onClose={() => setIsAdminOpen(false)}>
-        <button
-          type="button"
-          className="admin-fold__close"
-          onClick={() => setIsAdminOpen(false)}
-          aria-label="Close admin panel"
-        >×</button>
         <h2>Admin</h2>
         <p>Student management controls go here.</p>
       </AdminFold>
