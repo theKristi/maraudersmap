@@ -1,6 +1,6 @@
-import greatHallSvg from '../assets/great-hall.svg'
-import { StudentDot } from './StudentDot'
-import type { Student, Path, House, Position } from '../types'
+import greatHallSvg from '../../assets/great-hall.svg'
+import { StudentDot } from '../StudentDot/StudentDot'
+import type { Student, Path, House, Position } from '../../types'
 
 
 

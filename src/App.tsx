@@ -1,34 +1,40 @@
 
 import './App.css'
-import { GreatHall } from './components/GreatHall'
+import { GreatHall } from './components/GreatHall/GreatHall'
 import { Library } from './components/Library'
 import { useState, type JSX } from 'react'
 import useStudents from './hooks/useStudents'
 import getLocation from './utils/getLocation'
-import getCurrentRoom from './utils/getCurrentRoom'
 import type { Room } from './types'
-import { Classrooms } from './components/Classrooms/Classrooms'
+import { CharmsClassroom } from './components/Classrooms/Charms_class'
+import maraudersMap from './assets/master/marauders_map.svg'
+import MasterMap from './components/MasterMap/MasterMap'
+import { TransfigurationClassroom } from './components/Classrooms/Transfiguration_class'
 
 
 
 function App() {
 
   const { students } = useStudents()
-  const studentsInGreatHall = students.filter(s => getLocation(s.house) === "great-hall")
-  const studentsInLibrary = students.filter(s => getLocation(s.house) === "library").slice(0, 20);
-  const studentsInClass = students.filter(s => getLocation(s.house) === "classrooms").slice(0, 15);
-  const roomComponents: Record<Room, JSX.Element> = {
-    "great-hall": <GreatHall students={studentsInGreatHall} />,
-    "library": <Library students={studentsInLibrary} />,
-    "classrooms": <Classrooms students={studentsInClass} />
+  const studentsInGreatHall = students.filter(s => getLocation(s) === "Great-Hall")
+  const studentsInLibrary = students.filter(s => getLocation(s) === "Library")
+  const studentsInCharms = students.filter(s => getLocation(s) === "Charms-Classroom")
+  const studentsInTransfiguration = students.filter(s => getLocation(s) === "Transfiguration-Classroom")
+  const roomComponents: Partial<Record<Room, JSX.Element>> = {
+    "Great-Hall": <GreatHall students={studentsInGreatHall} />,
+    "Library": <Library students={studentsInLibrary} />,
+    "Charms-Classroom": <CharmsClassroom students={studentsInCharms} />,
+    "Transfiguration-Classroom":<TransfigurationClassroom students={studentsInTransfiguration} />,
     //"Gryffindor-common-room": 
   }
-  const [currentRoom, setCurrentRoom] = useState<Room>(() => getCurrentRoom())
+  const [currentRoom, setCurrentRoom] = useState<Room>("Great-Hall")
   const [displayedRoom, setDisplayedRoom] = useState<Room>(currentRoom)
   const [isTransitioning, setIsTransitioning] = useState(false)
+  const [showMap, setShowMap] = useState(false)
   const [isAdminOpen, setIsAdminOpen] = useState(false)
 
   const navigateTo = (room: Room) => {
+    setShowMap(false)
     if (room === displayedRoom || isTransitioning) return
     setCurrentRoom(room)      // store where we're going
     setIsTransitioning(true)  // trigger fold-out
@@ -41,22 +47,18 @@ function App() {
   return (
 
     <div className="app-shell">
-      <nav className="ribbon-nav">
-        <div className="ribbon-tabs">
-          <button
-            className={`ribbon-tab ${currentRoom === "great-hall" ? "active" : ""}`}
-            onClick={() => navigateTo("great-hall")}
-          >Great Hall</button>
-          <button
-            className={`ribbon-tab ${currentRoom === "library" ? "active" : ""}`}
-            onClick={() => navigateTo("library")}
-          >Library</button>
-          <button
-            className={`ribbon-tab ${currentRoom === "classrooms" ? "active" : ""}`}
-            onClick={() => navigateTo("classrooms")}
-          >Classrooms</button>
-        </div>
-      </nav>
+      {!showMap && (
+        <button
+          type="button"
+          className="home-button"
+          onClick={() => setShowMap(true)}
+          aria-label="Master Map"
+        >
+          <svg viewBox="800 372 300 336" aria-hidden="true">
+            <image href={maraudersMap} width={1920} height={1080} />
+          </svg>
+        </button>
+      )}
       <div className="app-layout">
         <div
           className={`map-panel ${isTransitioning ? 'fold-out' : 'fold-in'}`}
@@ -64,7 +66,9 @@ function App() {
             if (isTransitioning && e.target === e.currentTarget) handleFoldOut()
           }}
         >
-          {roomComponents[displayedRoom]}
+          {showMap
+            ? <MasterMap students={students} onNavigate={navigateTo} />
+            : roomComponents[displayedRoom] ?? null}
         </div>
       </div>
       <button

@@ -1,4 +1,4 @@
-import { StudentDot } from './StudentDot'
+import { StudentDot } from './StudentDot/StudentDot'
 import librarySvg from '../assets/library.svg'
 import type { Student, Position, Path } from '../types'
 
