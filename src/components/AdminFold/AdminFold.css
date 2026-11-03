@@ -1,0 +1,80 @@
+.admin-fold {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 600;
+}
+
+/* what's left where the page was folded away: the surface under it */
+.admin-fold__under {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(225deg, #1c1208 0%, #3b2812 100%);
+}
+
+.admin-fold__shadow {
+  position: absolute;
+  inset: 0;
+  filter: drop-shadow(-4px 4px 5px rgba(0, 0, 0, 0.4));
+}
+
+/* the back of the page: the same parchment, shaded along the crease */
+.admin-fold__flap {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.18)),
+    url(/src/assets/parchment.jpg) center / cover no-repeat;
+}
+
+.admin-fold__crease {
+  position: absolute;
+  top: 0;
+  width: 90px;
+  height: 3000px;
+  transform-origin: 90px 0;
+  background: linear-gradient(to left, rgba(60, 35, 5, 0.55), rgba(60, 35, 5, 0));
+  pointer-events: none;
+}
+
+.admin-fold__content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: 0 0;
+  padding: 20px;
+  color: #3a2a12;
+}
+
+.admin-fold__close {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  padding: 0 8px;
+  font-family: inherit;
+  font-size: 1.8rem;
+  line-height: 1;
+  color: #3a2a12;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.admin-fold__close:hover,
+.admin-fold__close:focus-visible {
+  color: #7f0909;
+}
+
+/* the clickable corner flap, matching the folded triangle at rest */
+.admin-fold__corner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  pointer-events: auto;
+  clip-path: polygon(0 0, 100% 100%, 0 100%);
+}
